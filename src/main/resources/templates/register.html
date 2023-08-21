@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+	<title>Registration Form</title>
+	<style>
+		body {
+			margin: 0;
+			overflow: fixed;
+			background: url('/Images/Background-1.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+
+		.header {
+			background-color: rgb(84, 39, 39);
+			height: 80px;
+			width: 100%;
+			display: flex;
+			justify-content: start;
+			align-items: center;
+		}
+
+		.logo .heading {
+			color: black;
+			font-weight: 700;
+			font-size: 30px;
+		}
+
+		.logo .heading {
+			display: flex;
+			justify-content: start;
+			align-items: center;
+			padding-left: 30px;
+		}
+
+		.section {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+		}
+
+		.outercontainer {
+			background: transparent;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 30px;
+			border: 2px solid rgb(84, 39, 39);
+			height: 500px;
+			width: 500px;
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.section input {
+			border: 2px solid rgb(84, 39, 39);
+			border-radius: 5px;
+			background-color: lightcyan;
+		}
+		
+		.section input:hover{
+			border: 2px solid black;
+		}
+
+		.section label {
+			color: rgb(6, 50, 22);
+		}
+	</style>
+</head>
+
+<body>
+	<header class="header">
+		<div class="logo">
+			<h2 class="heading">Edu<span style="color: white;">Master</span></h2>
+		</div>
+	</header>
+	<section class="section">
+		<div class="outercontainer">
+			<div class="Container">
+				<div class="form-heading">
+					<h3 style="color:rgb(3, 29, 39) ;font-size: 25px;">Welcome User Please Register to Explore More</h3>
+					<hr style="color: aliceblue;">
+				</div>
+				<form th:action="@{/lms/adduser}" method="post">
+					<label><b>Name:</b><span id="mesg1" style="color:red; font-size: 20px;">*</span></label>
+					<input type="text" name="name" required placeholder=" Enter your Full Name" pattern="[a-zA-Z]{3,15}">
+					<br><br>
+					<label><b>Email:</b><span id="mesg2" style="color:red; font-size: 20px;">*</span></label>
+					<input type="email" name="email" required placeholder="Enter your email" pattern="[a-z 0-9]+@[a-z]+.[a-z]{2,3}">
+					<br><br>
+					<label><b>Password:</b><span id="mesg3" style="color:red; font-size: 20px;">*</span></label>
+					<input type="password" name="password" required placeholder="Enter Password">
+					<br><br>
+					<label><b>Role:</b></label>
+					<input type="radio" name="role" value="trainer" required><b>Trainer</b><span id="mesg4" style="color:red; font-size: 20px;">*</span>
+					<input type="radio" name="role" value="student" required><b>Student</b><span id="mesg4" style="color:red;font-size: 20px;">*</span>
+					<br><br>
+					<input type="submit" title="Check Once Again Before submit"
+						style="background-color: rgb(31, 31, 169); color: white;border: 3px solid rgb(31, 31, 169);">
+					<br><br>
+					<input type="reset" class="reset" title="Are You Sure" style="background-color:brown; border: 2px solid brown; color: white;">
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

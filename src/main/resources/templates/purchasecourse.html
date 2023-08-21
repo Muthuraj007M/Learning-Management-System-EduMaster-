@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>View Course</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<style>
+		body {
+			background-color: rgb(251, 247, 247);
+			font-family: Arial, sans-serif;
+		}
+		
+		.header {
+			background-color: rgb(84, 39, 39);
+			position: fixed;
+			height: 80px;
+			width: 100%;
+			display: flex;
+			justify-content: start;
+			align-items: center;
+		}
+
+		.logo .heading {
+			color: black;
+			font-weight: 700;
+			font-size: 30px;
+			padding-left: 30px;
+		}
+		
+		.container-fluid {
+			padding-top: 150px;
+			width: 100%;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			justify-content: centre;
+			align-items: centre;
+		}
+
+		table {
+			margin: 0 auto;
+			width: 80%;
+			max-width: 1000px;
+		}
+
+		th {
+			color: #343a40;
+		}
+
+		h1 {
+			color: #343a40;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="header">
+		<div class="logo">
+			<h2 class="heading">Edu<span style="color: white;">Master</span></h2>
+		</div>
+	</header>
+	<div class="container-fluid">
+		<!-- Your table -->
+		<table class="table table-danger table-striped table-bordered border border-danger border border-2">
+			<thead>
+				<tr>
+					<th scope="col">Course Id</th>
+					<th scope="col">Course Name</th>
+					<th scope="col">Course Price</th>
+					<th scope="col">Lessons</th>
+					<th scope="col">Buy Course</th> <!-- New column header -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="course : ${courseList}">
+					<td th:text="${course.course_id}"></td>
+					<td th:text="${course.course_name}"></td>
+					<td th:text="${course.course_price}"></td>
+					<td>
+						<span th:each="lesson, lessonStat : ${course.lesson}">
+							<span th:text="${lesson.lesson_name}"></span><span th:if="${!lessonStat.last}">, </span>
+								</span>
+					</td>
+					<td>
+						<form id="payment-form">
+							<input type="hidden" class="email" th:value="${session.loggedInUser.email}" />
+							<input type="hidden" class="course-id" th:value="${course.course_id}" />
+							<button type="submit" id="pay-button" class="btn btn-success buy-button"
+								th:data-amount="${course.course_price}">BUY</button>
+						</form>
+					</td> <!-- New column with Buy button -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$(".buy-button").click(function (e) {
+				e.preventDefault();
+				var form = $(this).closest('form');
+				var amount = $(this).data("amount");
+				var email = form.find('.email').val();
+				var courseId = form.find('.course-id').val();
+				createOrder(amount, email, courseId);
+			});
+		});
+		function createOrder(amount, email, courseId) {
+			alert(amount + email + courseId)
+			$.post("/createOrder", {amount: amount, email: email, courseId: courseId})
+				.done(function (order) {
+					order = JSON.parse(order);
+					var options = {
+						"key": "rzp_test_ANiFbfIjOIx3EF",
+						"amount": order.amount_due.toString(),
+						"currency": "INR",
+						"name": "Edu Master",
+						"description": "Test Transaction",
+						"order_id": order.id,
+						"handler": function (response) {
+							verifyPayment(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature);
+						},
+						"prefill": {
+							"name": "Your Name", "email": "test@example.com",
+							"contact": "9999999999"
+						},
+						"notes": {
+							"address": "Your Address"
+						},
+						"theme": {
+							"color": "#F37254"
+						}
+					};
+					var rzp1 = new Razorpay(options);
+					rzp1.open();
+				})
+				.fail(function (error) {
+					console.error("Error:", error);
+				});
+		}
+		function verifyPayment(orderId, paymentId, signature) {
+			$.post("/verify", {orderId: orderId, paymentId: paymentId, signature: signature})
+				.done(function (isValid) {
+					if (isValid) {
+						console.log("Payment successful");
+					} else {
+						console.log("Payment failed");
+					}
+				})
+				.fail(function (error) {
+					console.error("Error:", error);
+				});
+		}
+	</script>
+</body>
+
+</html>

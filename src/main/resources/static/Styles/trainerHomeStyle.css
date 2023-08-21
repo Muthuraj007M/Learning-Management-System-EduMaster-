@@ -1,0 +1,161 @@
+body {
+	overflow: scroll;
+	margin: 0;
+	background-color:rgb(251, 247, 247);
+}
+
+.header {
+	background-color: rgb(84, 39, 39);
+	height: 80px;
+	width: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+.logo .heading {
+	color: black;
+	font-weight: 700;
+	font-size: 30px;
+}
+
+.logo .heading {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding-left: 30px;
+}
+
+.section {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 40px;
+}
+
+.section .sectionA {
+	border: 2px solid rgb(84, 39, 39);
+	border-radius: 5px;
+	height: 400px;
+	width: 300px;
+	margin-top: 20px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	row-gap: 280px;
+	background: url('/Images/addCourse.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.section .sectionA h4 {
+	color: crimson;
+	font-weight: 700;
+}
+
+.section .sectionA a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid brown;
+	background-color: lightpink;
+	border-radius: 5px;
+	color: black;
+	height: 30px;
+	width: 120px;
+	padding: 5px;
+	text-decoration: none;
+	font-weight: 700;
+	margin-left: 17px;
+
+}
+
+.section .sectionA a:hover {
+	border: 2px solid black;
+	background-color: lightseagreen;
+}
+
+.section .sectionB {
+	border: 2px solid rgb(84, 39, 39);
+	border-radius: 5px;
+	height: 400px;
+	width: 300px;
+	margin-top: 20px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	row-gap: 280px;
+	background: url('/Images/addlesson.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.section .sectionB h4 {
+	color: crimson;
+	font-weight: 700;
+}
+
+.section .sectionB a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid brown;
+	background-color: lightpink;
+	border-radius: 5px;
+	color: black;
+	height: 30px;
+	width: 120px;
+	padding: 5px;
+	text-decoration: none;
+	font-weight: 700;
+	margin-left: 17px;
+
+}
+
+.section .sectionB a:hover {
+	border: 2px solid black;
+	background-color: lightseagreen;
+}
+
+.section .sectionC {
+	border: 2px solid rgb(84, 39, 39);
+	border-radius: 5px;
+	height: 400px;
+	width: 300px;
+	margin-top: 20px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	row-gap: 280px;
+	background: url('/Images/viewcourse.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.section .sectionC h4 {
+	color: crimson;
+	font-weight: 700;
+}
+
+.section .sectionC a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid brown;
+	background-color: lightpink;
+	border-radius: 5px;
+	color: black;
+	height: 30px;
+	width: 120px;
+	padding: 5px;
+	text-decoration: none;
+	font-weight: 700;
+	margin-left: 17px;
+
+}
+
+.section .sectionC a:hover {
+	border: 2px solid black;
+	background-color: lightseagreen;
+}
